@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jackpus - Pilihan Ojek Kampus Terbaik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #FFD700; /* Kuning Emas, khas jaket almamater */
+            --secondary-color: #004d40; /* Hijau Tua, warna Unila */
+            --logo-green: #2dbd63; /* Hijau dari logo */
+            --dark-color: #2c3e50;
+            --light-color: #ffffff;
+            --gray-color: #f4f4f4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        /* Header & Navigation */
+        .main-header {
+            background: var(--light-color);
+            padding: 0.5rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo .logo-icon {
+            width: 50px;
+            height: 50px;
+        }
+
+        .logo .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo .logo-main-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--logo-green);
+        }
+
+        .logo .logo-tagline {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-nav ul li a {
+            color: var(--dark-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .main-nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--dark-color);
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 77, 64, 0.8), rgba(0, 77, 64, 0.8)), url('https://via.placeholder.com/1500x800.png?text=Kampus+Hijau+Unila') no-repeat center center/cover;
+            /* Ganti placeholder dengan foto Unila jika ada */
+            background-color: var(--secondary-color);
+            color: var(--light-color);
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-content .tagline {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-light {
+            background-color: var(--light-color);
+        }
+
+        .section-gray {
+            background-color: var(--gray-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 60px auto;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-item .icon {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px auto;
+        }
+
+        .feature-item .icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--light-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .service-card .icon {
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .service-card .icon svg {
+            width: 50px;
+            height: 50px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        /* Driver Profile Section */
+        .drivers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .driver-card {
+            background: var(--light-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .driver-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .driver-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            background-color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 4px solid var(--primary-color);
+        }
+
+        .driver-photo svg {
+            width: 80px;
+            height: 80px;
+            color: var(--secondary-color);
+        }
+
+        .driver-name {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--secondary-color);
+        }
+
+        .driver-major {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .driver-rating {
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .driver-rating svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* How to Order Section */
+        .how-to-order-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .step {
+            position: relative;
+        }
+
+        .step .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 auto 20px auto;
+            border: 4px solid var(--secondary-color);
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: #ccc;
+            transform: translateX(50%);
+            z-index: -1;
+        }
+
+        /* Join Us Section */
+        .join-us {
+            background: var(--secondary-color);
+            color: var(--light-color);
+            text-align: center;
+            border-radius: 15px;
+            padding: 60px 40px;
+        }
+
+        .join-us h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .join-us p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .main-footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .main-footer .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--logo-green);
+        }
+
+        .main-footer .social-links a {
+            color: var(--light-color);
+            margin: 0 10px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .main-footer .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-footer .copyright {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media(max-width: 768px) {
+            .main-nav {
+                position: fixed;
+                top: 74px; /* Adjusted for smaller logo */
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 74px);
+                background: var(--light-color);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: left 0.3s ease-in-out;
+            }
+
+            .main-nav.active {
+                left: 0;
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .main-nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            .main-nav ul li a {
+                font-size: 1.5rem;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero {
+                height: 70vh;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .how-to-order-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step:not(:last-child)::after {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">
+                <svg class="logo-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#2dbd63"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M344 32c-17.67 0-32 14.33-32 32s14.33 32 32 32 32-14.33 32-32-14.33-32-32-32zm-3.375 80h-89.25c-11.4 0-21.75 6.075-27.375 15.825L192 185.35V256h64v-55.5l22.1-39.975c6.45-11.625 18.9-18.525 32.25-18.525H352V96c0-8.8-7.2-16-16-16s-19.375 0-19.375 0zM128 288c-53.025 0-96 42.975-96 96s42.975 96 96 96 96-42.975 96-96-42.975-96-96-96zm0 128c-17.625 0-32-14.375-32-32s14.375-32 32-32 32 14.375 32 32-14.375 32-32 32zm272-128c-53.025 0-96 42.975-96 96s42.975 96 96 96 96-42.975 96-96-42.975-96-96-96zm0 128c-17.625 0-32-14.375-32-32s14.375-32 32-32 32 14.375 32 32-14.375 32-32 32zM272 288h-16v-64h-64v-48h-16c-35.35 0-64 28.65-64 64v48h-16c-8.8 0-16 7.2-16 16s7.2 16 16 16h32v16c0 4.425 3.575 8 8 8h16c4.425 0 8-3.575 8-8v-16h32v16c0 4.425 3.575 8 8 8h16c4.425 0 8-3.575 8-8v-16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16z"></path></g></svg>
+                <div class="logo-text-wrapper">
+                    <span class="logo-main-text">JackPus</span>
+                    <span class="logo-tagline">PILIHAN OJEK KAMPUS TERBAIK</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Layanan</a></li>
+                    <li><a href="#drivers">Driver</a></li>
+                    <li><a href="#how-to">Cara Pesan</a></li>
+                    <li><a href="#join">Gabung Driver</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1><span>Jackpus</span> Unila</h1>
+                <p class="tagline">Solusi Sat-Set Warga Unila</p>
+                <p>Layanan ojek andalan di dalam dan sekitar Kampus Hijau. Cepat, aman, dan pas di kantong mahasiswa.</p>
+                <a href="https://chat.whatsapp.com/Fq3Y95aL7M5AXMZk4aG05P?mode=ac_t" target="_blank" class="btn btn-primary">Pesan via Grup WhatsApp</a>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Kenapa Pilih Jackpus?</h2>
+                <p class="section-subtitle">Kami bukan sekadar ojek, kami adalah kawanmu di kampus. Kami mengerti kebutuhanmu sebagai warga Unila.</p>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.383 2.133a.923.923 0 0 0-1.292.514l-2.022 4.31a.923.923 0 0 0 .804 1.343h1.83c.43 0 .81-.285.904-.702l.39-1.73H15.5a1 1 0 0 1 .98.803l.39 1.95h2.15a1 1 0 0 1 .98.803l.39 1.95h1.61a1 1 0 0 1 .894 1.447l-2.003 4.006a1 1 0 0 1-.894.553H16.5a1 1 0 0 1-.98-.803l-.39-1.95H13a1 1 0 0 1-.98-.803l-.39-1.95H9.5a1 1 0 0 1-.98-.803l-.39-1.95H6.02a1 1 0 0 1-.98-.803L4.65 9.5H2.52a1 1 0 0 1-.894-1.447l2.003-4.006a1 1 0 0 1 .894-.553h2.724a1 1 0 0 1 .98.803l.39 1.95h2.15a1 1 0 0 1 .98.803l.39 1.95h1.73a.923.923 0 0 0 .905-.702l.39-1.73a.923.923 0 0 0-.11-.814L12.383 2.133zM8 17a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm-4 2a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm14-2a4 4 0 1 1-8 0 4 4 0 0 1 8 0zm-4 2a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg>
+                        </div>
+                        <h3>Cepat & Efisien</h3>
+                        <p>Driver kami hafal setiap sudut dan jalan pintas Unila. Nggak ada lagi kata telat masuk kelas!</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.25 14.25L7.5 13l1.41-1.41L10 12.41l4.59-4.59L16 9.25l-5.25 5z"/></svg>
+                        </div>
+                        <h3>Aman & Terpercaya</h3>
+                        <p>Semua driver adalah mahasiswa Unila terverifikasi. Keamanan dan kenyamananmu adalah prioritas kami.</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12.25c1.24 0 2.25-1.01 2.25-2.25S13.24 7.75 12 7.75 9.75 8.76 9.75 10s1.01 2.25 2.25 2.25zm4.5 4c0-1.5-3-2.25-4.5-2.25s-4.5.75-4.5 2.25v.75h9v-.75zM17.34 14.86c1.06-.99 1.66-2.36 1.66-3.86 0-2.76-2.24-5-5-5s-5 2.24-5 5c0 1.5.6 2.87 1.66 3.86C6.66 15.68 4 17.9 4 21h16c0-3.1-2.66-5.32-5.66-6.14zM12 6c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z"/></svg>
+                        </div>
+                        <h3>Dari & Untuk Unila</h3>
+                        <p>Kami adalah bagian dari komunitasmu. Menggunakan Jackpus berarti mendukung kawan sendiri.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section section-gray">
+            <div class="container">
+                <h2 class="section-title">Layanan Sat-Set Kami</h2>
+                <p class="section-subtitle">Apapun kebutuhan mobilitasmu di kampus, kami punya solusinya. Tinggal pilih!</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm9.5-13c-2.42 0-4.5 1.71-4.9 4h1.9c.38-1.38 1.55-2.4 2.98-2.4.92 0 1.75.41 2.32 1.07L13 12h7V5l-2.04 2.04C16.89 5.91 15.28 5 13.5 5z"/></svg>
+                        </div>
+                        <h3>Jack-Ride</h3>
+                        <p>Ngejar kelas, ke perpus, atau pulang ke kos? Sat-set sampai tujuan dengan aman dan cepat.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M18 6h-2c0-2.21-1.79-4-4-4S8 3.79 8 6H6c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2c1.1 0 2 .9 2 2h-4c0-1.1.9-2 2-2zm6 16H6V8h2v2c0 .55.45 1 1 1s1-.45 1-1V8h4v2c0 .55.45 1 1 1s1-.45 1-1V8h2v12z"/></svg>
+                        </div>
+                        <h3>Jack-Food</h3>
+                        <p>Lapar tapi mager keluar? Makanan dari kantin KPA, Kopma, atau warung favoritmu kami antarkan.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M20.54 5.23l-1.39-1.68C18.88 3.21 18.47 3 18 3H6c-.47 0-.88.21-1.16.55L3.46 5.23C3.17 5.57 3 6.02 3 6.5V19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6.5c0-.48-.17-.93-.46-1.27zM12 17.5L6.5 12H10v-2h4v2h3.5L12 17.5zM5.12 5l.81-1h12l.94 1H5.12z"/></svg>
+                        </div>
+                        <h3>Jack-Send</h3>
+                        <p>Kirim dokumen, tugas, atau barang antar fakultas jadi gampang. Nggak perlu repot jalan kaki.</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"/></svg>
+                        </div>
+                        <h3>Jack-Print</h3>
+                        <p>Deadline mepet? Biar kami yang urus cetak, fotokopi, atau jilid tugasmu. Kamu tinggal terima beres.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Driver Profiles Section -->
+        <section id="drivers" class="section section-light">
+            <div class="container">
+                <h2 class="section-title">Kenali Driver Andalan Kami</h2>
+                <p class="section-subtitle">Driver kami adalah mahasiswa Unila yang ramah, terpercaya, dan siap membantumu.</p>
+                <div class="drivers-grid">
+                    <!-- Driver Card 1 -->
+                    <div class="driver-card">
+                        <div class="driver-photo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <h3 class="driver-name">Budi Santoso</h3>
+                        <p class="driver-major">Fakultas Teknik '21</p>
+                        <div class="driver-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                    </div>
+                    <!-- Driver Card 2 -->
+                    <div class="driver-card">
+                        <div class="driver-photo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <h3 class="driver-name">Citra Lestari</h3>
+                        <p class="driver-major">FISIP '22</p>
+                        <div class="driver-rating">
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                    </div>
+                    <!-- Driver Card 3 -->
+                    <div class="driver-card">
+                        <div class="driver-photo">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        </div>
+                        <h3 class="driver-name">Eko Nugroho</h3>
+                        <p class="driver-major">Fakultas Pertanian '20</p>
+                        <div class="driver-rating">
+                           <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                           <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                           <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                           <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                           <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Order Section -->
+        <section id="how-to" class="section section-gray">
+            <div class="container">
+                <h2 class="section-title">Cara Pesan? Gampang Banget!</h2>
+                <p class="section-subtitle">Cukup 3 langkah mudah dan driver kami akan langsung meluncur ke lokasimu.</p>
+                <div class="how-to-order-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Gabung & Chat Grup</h3>
+                        <p>Klik tombol "Pesan via Grup WhatsApp" untuk bergabung ke grup order kami.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Kirim Format Pesan</h3>
+                        <p>Di dalam grup, ketik pesananmu: Nama / Lokasi Jemput / Tujuan / Layanan.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Driver Merespon</h3>
+                        <p>Driver yang tersedia akan merespon chat-mu dan segera datang menjemput.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Us Section -->
+        <section id="join" class="section section-light">
+            <div class="container">
+                <div class="join-us">
+                    <h2>Gabung Jadi Mitra Driver Jackpus!</h2>
+                    <p>Punya motor dan ingin dapat penghasilan tambahan di sela-sela kuliah? Jadilah bagian dari keluarga Jackpus. Waktu fleksibel, penghasilan lumayan!</p>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20tertarik%20untuk%20bergabung%20menjadi%20mitra%20driver%20Jackpus." target="_blank" class="btn btn-primary">Daftar Jadi Driver</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-logo">JackPus</div>
+            <p>Solusi Sat-Set Warga Unila</p>
+            <div class="social-links">
+                <!-- Ganti # dengan link sosial media Anda -->
+                <a href="#" target="_blank" title="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.011 3.584-.069 4.85c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.252-.148-4.771-1.691-4.919-4.919-.058-1.265-.069-1.645-.069-4.85s.011-3.584.069-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163m0-2.163C8.74 0 8.333.011 7.053.069 2.59.284.284 2.59.069 7.053.011 8.333 0 8.74 0 12s.011 3.667.069 4.947c.215 4.46 2.525 6.77 7.004 6.986C8.333 23.989 8.74 24 12 24s3.667-.011 4.947-.069c4.46-.215 6.77-2.525 6.986-7.004C23.989 15.667 24 15.26 24 12s-.011-3.667-.069-4.947c-.215-4.46-2.525-6.77-6.986-7.004C15.667.011 15.26 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+                </a>
+                <a href="#" target="_blank" title="TikTok">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-2.43.05-4.88-.36-7.02-1.82-1.39-.93-2.48-2.27-3.1-3.8-1.05-2.52-1.1-5.18-.16-7.73.95-2.56 2.99-4.51 5.54-5.34 1.6-.51 3.26-.73 4.91-.71.04 2.68-.04 5.36.01 8.04.01.24.02.48.02.72v.01c-.33-.02-.66-.03-1-.03-1.06 0-2.09.25-3.07.75-1.2.6-2.11 1.56-2.61 2.83-.31.78-.4 1.63-.38 2.47.03.8.23 1.59.57 2.31.42.87 1.05 1.61 1.82 2.13.78.53 1.68.84 2.61.92.93.08 1.86-.06 2.71-.41.85-.35 1.61-.88 2.2-1.55.59-.67.99-1.47 1.19-2.35.23-1.05.23-2.15.03-3.21-.19-.99-.58-1.92-1.11-2.77-.42-.68-.95-1.28-1.57-1.79-.01-.11-.01-.21-.02-.32.01-2.22.01-4.44.01-6.66z"/></svg>
+                </a>
+            </div>
+            <div class="copyright">
+                &copy; <span id="year"></span> Jackpus. Dibuat dengan ❤ oleh Mahasiswa Unila.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.main-nav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.main-nav a').forEach(n => n.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }));
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
